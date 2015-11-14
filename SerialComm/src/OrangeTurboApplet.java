@@ -1,27 +1,27 @@
-import java.awt.event.*;
-import java.awt.*;
-import java.awt.Dialog.ModalityType;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.StringTokenizer;
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-
-import javax.swing.*;
-
 /**
- * This is the GUI interface for the functions of the BananaTurbo Car
+ * My first applet
  * 
- * @author Zachary Jones
+ * @author zrjones
  *
  */
-public class BananaTurboGUI extends JFrame implements ActionListener {
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.applet.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import javax.swing.JButton;
+
+public class OrangeTurboApplet extends Applet implements ActionListener{
 	static SerialTest main;
 	static Codes codes;
 	static BufferedReader input;
 	static OutputStream output;
 	private byte[] data;
-
+	
 	// Window and button strings
 	private final static String TITLE = "BananaTurbo Control Center";
 	private final static String ALGS = "Algorithms";
@@ -39,89 +39,44 @@ public class BananaTurboGUI extends JFrame implements ActionListener {
 	private final static String HORN = "Horn";
 	private final static String LEDSHOW = "LED Show";
 	private final static String QUIT = "Quit";
-
-	// Size constants for the window
-	private final static int FRAME_WIDTH = 730;
-	private final static int FRAME_HEIGHT = 500;
-
+	
 	// Buttons
-	private JButton btnForward = new JButton(FORWARD);
-	private JButton btnStop = new JButton(STOP);
-	private JButton btnReverse = new JButton(REVERSE);
-	private JButton btnHeadLights = new JButton(HEADLIGHTS);
-	private JButton btnTailLights = new JButton(TAILLIGHTS);
-	private JButton btnBlinkerLeft = new JButton(BLINKERLEFT);
-	private JButton btnBlinkerRight = new JButton(BLINKERRIGHT);
-	private JButton btnCircle = new JButton(CIRCLE);
-	private JButton btnSpin = new JButton(SPIN);
-	private JButton btnLeft = new JButton(LEFT);
-	private JButton btnRight = new JButton(RIGHT);
-	private JButton btnHorn = new JButton(HORN);
-	private JButton btnLEDShow = new JButton(LEDSHOW);
-	private JButton btnQuit = new JButton(QUIT);
+	private Button btnForward = new Button(FORWARD);
+	private Button btnStop = new Button(STOP);
+	private Button btnReverse = new Button(REVERSE);
+	private Button btnHeadLights = new Button(HEADLIGHTS);
+	private Button btnTailLights = new Button(TAILLIGHTS);
+	private Button btnBlinkerLeft = new Button(BLINKERLEFT);
+	private Button btnBlinkerRight = new Button(BLINKERRIGHT);
+	private Button btnCircle = new Button(CIRCLE);
+	private Button btnSpin = new Button(SPIN);
+	private Button btnLeft = new Button(LEFT);
+	private Button btnRight = new Button(RIGHT);
+	private Button btnHorn = new Button(HORN);
+	private Button btnLEDShow = new Button(LEDSHOW);
+	private Button btnQuit = new Button(QUIT);
+    
+     public void init() 
+     { 
+        // Set the layout to GridLayout that is a 4 x 4 block
+        setLayout(new GridLayout(4, 4)); //The main panel
 
-	// Panels
-	// GridLayout layout = new GridLayout(3,3);
-	private JPanel pnlAlgs = new JPanel(new GridLayout(4, 4)); // Main panel
-
-	// --------- Constructors and GUI Set Up -------
-	/**
-	 * Constructor: Creates a new GUI
-	 */
-	public BananaTurboGUI() {
-		//Set Up All The Variables
-		main = new SerialTest(); // opens the port to anything we
-		main.initialize();
-		codes = new Codes();
-		input = main.getInput();
-		output = main.getOutput();
-		setUpGUI();
-	}
-
-	/**
-	 * Sets up the GUI framework, adds listeners.
-	 */
-	private void setUpGUI() {	
-		// Construct the main window
-		setTitle(TITLE);
-		setSize(FRAME_WIDTH, FRAME_HEIGHT);
-		Container c = getContentPane();
-		c.setLayout(new BoxLayout(c, BoxLayout.LINE_AXIS));
-		setUpPanels();
-
-		c.add(pnlAlgs);
-		addListeners();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true);
-	}
-
-	/**
-	 * Sets up the panels that comprise the GUI
-	 */
-	private void setUpPanels() {
-
-		pnlAlgs.add(btnForward);
-		pnlAlgs.add(btnStop);
-		pnlAlgs.add(btnReverse);
-		pnlAlgs.add(btnHeadLights);
-		pnlAlgs.add(btnTailLights);
-		pnlAlgs.add(btnBlinkerLeft);
-		pnlAlgs.add(btnBlinkerRight);
-		pnlAlgs.add(btnCircle);
-		pnlAlgs.add(btnSpin);
-		pnlAlgs.add(btnLeft);
-		pnlAlgs.add(btnRight);
-		pnlAlgs.add(btnHorn);
-		pnlAlgs.add(btnLEDShow);
-		pnlAlgs.add(btnQuit);
-
-		pnlAlgs.setBorder(BorderFactory.createTitledBorder(ALGS));
-	}
-
-	/**
-	 * Adds action listeners to all the buttons
-	 */
-	private void addListeners() {
+        // now that all is set we can add these components to the applet 
+        add(btnForward);
+		add(btnStop);
+		add(btnReverse);
+		add(btnHeadLights);
+		add(btnTailLights);
+		add(btnBlinkerLeft);
+		add(btnBlinkerRight);
+		add(btnCircle);
+		add(btnSpin);
+		add(btnLeft);
+		add(btnRight);
+		add(btnHorn);
+		add(btnLEDShow);
+		add(btnQuit);
+		
 		btnForward.addActionListener(this);
 		btnStop.addActionListener(this);
 		btnReverse.addActionListener(this);
@@ -136,16 +91,20 @@ public class BananaTurboGUI extends JFrame implements ActionListener {
 		btnHorn.addActionListener(this);
 		btnLEDShow.addActionListener(this);
 		btnQuit.addActionListener(this);
-	}
+		//The action listeners
+		
+     }
 
-	@Override
+	public void paint(Graphics g) {
+		
+		repaint(); //Lets the applet show that message
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(btnForward)) {
 			System.out.println("Moves Car Forward");
 			data[0] = 'f';
 			sendData(data);
-			
-			
 
 		} else if (e.getSource().equals(btnStop)) {
 			System.out.println("Car is Stopped");
@@ -227,7 +186,7 @@ public class BananaTurboGUI extends JFrame implements ActionListener {
 			e1.printStackTrace();
 		}
 	}
-
+	
 	/**
 	 * Startup method for the application. Creates the GUI.
 	 * 
@@ -235,7 +194,7 @@ public class BananaTurboGUI extends JFrame implements ActionListener {
 	 *            args[0] is the name of the input text file.
 	 */
 	public static void main(String[] args) {
-		new BananaTurboGUI();
+		new OrangeTurboApplet();
 
 		//-----------------------------------------------------------------------------------------------
 		//--------------------------    Everything from the Serial Test Main  ---------------------------
@@ -277,5 +236,6 @@ public class BananaTurboGUI extends JFrame implements ActionListener {
 		}
 		
 	}
-
+	
+	
 }

@@ -269,7 +269,7 @@ public class ledGUI extends JFrame implements ActionListener {
 			sendData(data);
 			
 		} else if (e.getSource().equals(btnRainbow)) {
-			//System.out.println("Rainbow Activiate!");
+			//System.out.println("Rainbow Activate!");
 			data = buildCharArray('0', '2', ' ', ' ');
 			sendData(data);
 			
@@ -341,39 +341,11 @@ public class ledGUI extends JFrame implements ActionListener {
 		t.start();
 		System.out.println("Started");
 		try {
-			//boolean in = true;
-			//while (in) {
 				String inputLine = input.readLine();
-				// System.out.println("---"+ inputLine + "---"); //You need at
-				// have at least one line of input for the
-				// program to work
-				// The --- on both sides is to see if there are any hiddle
-				// characters
-
-				// How to input to the stream
-				// LIST OF COMMANDS FOR THE ARDUINO
-				//byte input1[] = { '0', '7', '0', '1' };
-				//byte input2[] = { '0', '9', '0', '1' };
-				//byte input3[] = { '1', '1', '0', '1' };
-				//byte input4[] = { '1', '3', '0', '1' };
-
-				//codes.setACode(1, input1);
-				//codes.setACode(2, input2);
-				//codes.setACode(3, input3);
-				//codes.setACode(4, input4);
-
-				//output.write(codes.getACode(1));
-				//output.write(codes.getACode(2));
-				//output.write(codes.getACode(3));
-				//output.write(codes.getACode(4));
-			//}
 
 		} catch (Exception e) {
 			System.err.println(e.toString());
 		}
-		//-----------------------------------------------------------------------------------------------
-		//-----------------------------------------------------------------------------------------------
-		//-----------------------------------------------------------------------------------------------
 	}
 	
 	

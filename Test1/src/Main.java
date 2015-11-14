@@ -1,3 +1,10 @@
+/**
+ * Use this program to figure out what ports are on
+ * the computer that you are on.
+ * 
+ * @author zrjones
+ */
+
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JSlider;

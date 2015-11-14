@@ -1,4 +1,9 @@
-
+/**
+ * A class for storing codes
+ * 
+ * @author zrjones
+ *
+ */
 public class Codes {
 	private Code[] codes;
 	
@@ -12,10 +17,22 @@ public class Codes {
 		}
 	}
 	
+	/**
+	 * Sets a code in the code array
+	 * 
+	 * @param numCode index of the code
+	 * @param code the code to set
+	 */
 	public void setACode(int numCode, byte[] code) {
 		codes[numCode-1].setCode(code);
 	}
 	
+	/**
+	 * Gets a code in the code array
+	 * 
+	 * @param numCode index of the code
+	 * @return code at the index
+	 */
 	public byte[] getACode(int numCode) {
 		return codes[numCode-1].getCode();
 	}
